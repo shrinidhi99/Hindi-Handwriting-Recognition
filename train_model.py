@@ -11,8 +11,9 @@ import keras.backend as K
 
 K.set_image_data_format('channels_last')
 
-# training the convulotional neural network
-def keras_model(image_x,image_y):
+
+# training the conv-neural network
+def keras_model(image_x, image_y):
     num_of_classes = 37
     model = Sequential()
     model.add(Conv2D(filters=32, kernel_size=(5, 5), input_shape=(image_x, image_y, 1), activation='sigmoid'))
@@ -25,7 +26,7 @@ def keras_model(image_x,image_y):
     # saving the model
     filepath = "devanagari_model.h5"
     checkpoint1 = ModelCheckpoint(filepath, monitor='val_acc', verbose=1, save_best_only=True, mode='max')
-    #checkpoint2 = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+    # checkpoint2 = ModelCheckpoint(filepath, monitor='val_loss', verbose=1, save_best_only=True, mode='min')
     callbacks_list = [checkpoint1]
 
     return model, callbacks_list
@@ -33,7 +34,7 @@ def keras_model(image_x,image_y):
 
 def main():
     # reading the dataset
-    data = pd.read_csv("/data.csv")
+    data = pd.read_csv("data.csv")
     dataset = np.array(data)
     np.random.shuffle(dataset)
     X = dataset
@@ -79,11 +80,8 @@ def main():
     print_summary(model)
 
     # saving the model to this address
-    model.save('/devanagari_model.h5')
-
+    model.save('devanagari_model.h5')
 
 
 main()
 K.clear_session();
-
-    

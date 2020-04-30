@@ -5,7 +5,8 @@ import numpy as np
 from collections import deque
 
 # loading the model
-model1 = load_model('/devanagari_model.h5')
+model1 = load_model('devanagari_model.h5')
+
 
 def main():
     letter_count = {0: 'CHECK', 1: '01_ka', 2: '02_kha', 3: '03_ga', 4: '04_gha', 5: '05_kna', 6: 'character_06_cha',
@@ -16,12 +17,12 @@ def main():
                     19: '19_dha', 20: '20_na', 21: '21_pa', 22: '22_pha',
                     23: '23_ba',
                     24: '24_bha', 25: '25_ma', 26: '26_yaw', 27: '27_ra', 28: '28_la', 29: '29_waw', 30: '30_motosaw',
-                    31: '31_petchiryakha',32: '32_patalosaw', 33: '33_ha',
+                    31: '31_petchiryakha', 32: '32_patalosaw', 33: '33_ha',
                     34: '34_chhya', 35: '35_tra', 36: '36_gya', 37: 'CHECK'}
     cap = cv2.VideoCapture(0)
     Lower_green = np.array([110, 50, 50])
     Upper_green = np.array([130, 255, 255])
-    pred_class=0
+    pred_class = 0
     pts = deque(maxlen=512)
     blackboard = np.zeros((480, 640, 3), dtype=np.uint8)
     digit = np.zeros((200, 200, 3), dtype=np.uint8)
@@ -75,6 +76,8 @@ def main():
         k = cv2.waitKey(10)
         if k == 27:
             break
+
+
 # prediction of the character
 def keras_predict(model, image):
     processed = keras_process_image(image)
@@ -92,5 +95,6 @@ def keras_process_image(img):
     img = np.reshape(img, (-1, image_x, image_y, 1))
     return img
 
-keras_predict(model1, np.zeros((32,32,1), dtype = np.uint8))
+
+keras_predict(model1, np.zeros((32, 32, 1), dtype=np.uint8))
 main()

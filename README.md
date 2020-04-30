@@ -5,3 +5,6 @@
 Dataset can be found [here](http://archive.ics.uci.edu/ml/datasets/Devanagari+Handwritten+Character+Dataset).
 
 ![GIF](/video.gif "Predictions")
+
+> Run ```train_model.py``` to train the model
+> Run ```devanagari.py``` to predict results
